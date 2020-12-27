@@ -43,19 +43,19 @@ class GameWonFragment : Fragment() {
         val binding: FragmentGameWonBinding = DataBindingUtil.inflate(
                 inflater, R.layout.fragment_game_won, container, false)
         binding.nextMatchButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(
-                    GameWonFragmentDirections.actionGameWonFragmentToGameFragment())
+            //view.findNavController().navigate(GameWonFragmentDirections.actionGameWonFragmentToGameFragment())
         }
         setHasOptionsMenu(true)
         return binding.root
     }
 
-    private fun getShareIntent() : Intent {
-        val args = GameWonFragmentArgs.fromBundle(requireArguments())
-        return ShareCompat.IntentBuilder.from(activity!!)
+    private fun getShareIntent() : Intent? {
+        //val args = GameWonFragmentArgs.fromBundle(requireArguments())
+        /*return ShareCompat.IntentBuilder.from(activity!!)
                 .setText(getString(R.string.share_success_text, args.numCorrect, args.numQuestions))
                 .setType("text/plain")
-                .intent
+                .intent*/
+        return null
     }
 
     private fun shareSuccess() {
@@ -66,7 +66,7 @@ class GameWonFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.winner_menu, menu)
         // check if the activity resolves
-        if (null == getShareIntent().resolveActivity(requireActivity().packageManager)) {
+        if (null == getShareIntent()?.resolveActivity(requireActivity().packageManager)) {
             // hide the menu item if it doesn't resolve
             menu.findItem(R.id.share)?.isVisible = false
         }
